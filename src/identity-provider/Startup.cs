@@ -39,6 +39,11 @@ namespace identity_provider
 
           await context.Response.WriteAsync(roles);
         });
+
+        endpoints.MapPost("/auth/check", async context =>
+        {
+        });
+      });
     }
   }
 }
