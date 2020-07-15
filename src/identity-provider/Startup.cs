@@ -61,6 +61,12 @@ namespace identity_provider
 
             await context.Response.WriteAsync("Permission denied");
           }
+          else
+          {
+            context.Response.StatusCode = 200;
+
+            await context.Response.WriteAsync("OK!");
+          }
         });
       });
     }
