@@ -18,4 +18,16 @@ public class OrderService : OrderServiceBase
     _logger = logger;
   }
 
+  private static async Task<HttpResponseMessage> CheckAuth(string microserviceName, string token, string action)
+  {
+    var payload = new
+    {
+      microserviceName = microserviceName,
+      token = token,
+      action = action
+    };
+
+    var client = new HttpClient();
+    return await client.PostAsync("http://localhost:7000/auth/check", new StringContent(JsonSerializer.Serialize(payload)));
+  }
 }
