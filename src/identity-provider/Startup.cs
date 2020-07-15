@@ -33,6 +33,12 @@ namespace identity_provider
         {
           await context.Response.WriteAsync("Hello World!");
         });
+
+        endpoints.MapGet("/auth/policy", async context => {
+          var roles = "[{\"role\":\"Developer\",\"action\":\"Read\",\"resource\":\"CategoryTree\"},{\"role\":\"Developer\",\"action\":\"Read\",\"resource\":\"ContentManager\"},{\"role\":\"Developer\",\"action\":\"Read\",\"resource\":\"MediaManager\"},{\"role\":\"Developer\",\"action\":\"Read\",\"resource\":\"Product\"}]";
+
+          await context.Response.WriteAsync(roles);
+        });
     }
   }
 }
