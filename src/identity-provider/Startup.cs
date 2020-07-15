@@ -43,6 +43,9 @@ namespace identity_provider
         endpoints.MapPost("/auth/check", async context =>
         {
           var payload = await JsonSerializer.DeserializeAsync<Dictionary<string, string>>(context.Request.Body);
+
+          var token = payload["token"];
+          var action = payload["action"];
         });
       });
     }
