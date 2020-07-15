@@ -46,6 +46,8 @@ namespace identity_provider
 
           var token = payload["token"];
           var action = payload["action"];
+
+          Console.WriteLine($"Auth request received for {action} : {token}");
         });
       });
     }
