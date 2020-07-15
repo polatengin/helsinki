@@ -25,6 +25,9 @@ namespace proxy
 
       app.UseRouting();
 
+      app.UseEndpoints(endpoints =>
+      {
+      });
     }
   }
 }
