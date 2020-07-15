@@ -48,6 +48,13 @@ namespace identity_provider
           var action = payload["action"];
 
           Console.WriteLine($"Auth request received for {action} : {token}");
+
+          if (action == "deleteOrder")
+          {
+            context.Response.StatusCode = 403;
+
+            await context.Response.WriteAsync("Permission denied");
+          }
         });
       });
     }
