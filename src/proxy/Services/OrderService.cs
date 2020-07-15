@@ -30,4 +30,31 @@ public class OrderService : OrderServiceBase
     var client = new HttpClient();
     return await client.PostAsync("http://localhost:7000/auth/check", new StringContent(JsonSerializer.Serialize(payload)));
   }
+
+  public override async Task<MakeOrderResponse> MakeOrder(MakeOrderRequest request, ServerCallContext context)
+  {
+    var headers = context.RequestHeaders;
+
+    var microserviceName = headers.FirstOrDefault(e => e.Key == "microservicename").Value;
+    var token = headers.FirstOrDefault(e => e.Key == "token").Value;
+
+    Console.WriteLine($"Received... {microserviceName} is asking for permission with {token} token to make an order");
+
+    var response = await CheckAuth(microserviceName, token, "makeOrder");
+
+    if (response.IsSuccessStatusCode)
+    {
+      var handler = new HttpClientHandler();
+      handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+
+      using (var channel = GrpcChannel.ForAddress("https://localhost:6001", new GrpcChannelOptions { HttpHandler = handler }))
+      {
+        var grpcClient = new OrderServiceClient(channel);
+
+        return await grpcClient.MakeOrderAsync(request, headers);
+      }
+    }
+
+    return new MakeOrderResponse { Success = false };
+  }
 }
