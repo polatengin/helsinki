@@ -5,4 +5,8 @@
     <RootNamespace>microservice_2</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.29.0" />
+  </ItemGroup>
+
 </Project>
