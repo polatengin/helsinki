@@ -24,6 +24,9 @@ namespace microservice_2
 
       app.UseRouting();
 
+      app.UseEndpoints(endpoints =>
+      {
+      });
     }
   }
 }
