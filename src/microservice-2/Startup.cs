@@ -31,6 +31,8 @@ namespace microservice_2
         {
           await context.Response.WriteAsync("Hello World!");
         });
+
+        endpoints.MapGrpcService<OrderService>();
       });
     }
   }
