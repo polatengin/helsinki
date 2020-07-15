@@ -1,3 +1,10 @@
 syntax = "proto3";
 
 package order;
+
+// MakeOrder request message
+message MakeOrderRequest {
+  int32 id = 1;
+  string product = 2;
+  double price = 3;
+}
