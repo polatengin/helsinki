@@ -31,4 +31,21 @@ public class OrderService : OrderServiceBase
 
     return Task.FromResult(new MakeOrderResponse { Success = true });
   }
+
+  public override Task<DeleteOrderResponse> DeleteOrder(DeleteOrderRequest request, ServerCallContext context)
+  {
+    var headers = context.RequestHeaders;
+
+    var microserviceName = headers.FirstOrDefault(e => e.Key == "microservicename").Value;
+    var token = headers.FirstOrDefault(e => e.Key == "token").Value;
+
+    var payload = new {
+      microserviceName = microserviceName,
+      token = token
+    };
+
+    Console.WriteLine($"Received... {microserviceName} is deleting an order with {token} token");
+
+    return Task.FromResult(new DeleteOrderResponse { Success = true });
+  }
 }
