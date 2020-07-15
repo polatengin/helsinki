@@ -27,5 +27,8 @@ namespace identity_provider
 
       app.UseRouting();
 
+      app.UseEndpoints(endpoints =>
+      {
+    }
   }
 }
