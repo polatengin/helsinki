@@ -57,4 +57,31 @@ public class OrderService : OrderServiceBase
 
     return new MakeOrderResponse { Success = false };
   }
+
+  public override async Task<DeleteOrderResponse> DeleteOrder(DeleteOrderRequest request, ServerCallContext context)
+  {
+    var headers = context.RequestHeaders;
+
+    var microserviceName = headers.FirstOrDefault(e => e.Key == "microservicename").Value;
+    var token = headers.FirstOrDefault(e => e.Key == "token").Value;
+
+    Console.WriteLine($"Received... {microserviceName} is asking for permission with {token} token to delete an order");
+
+    var response = await CheckAuth(microserviceName, token, "deleteOrder");
+
+    if (response.IsSuccessStatusCode)
+    {
+      var handler = new HttpClientHandler();
+      handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+
+      using (var channel = GrpcChannel.ForAddress("https://localhost:6001", new GrpcChannelOptions { HttpHandler = handler }))
+      {
+        var grpcClient = new OrderServiceClient(channel);
+
+        return await grpcClient.DeleteOrderAsync(request, headers);
+      }
+    }
+
+    return new DeleteOrderResponse { Success = false };
+  }
 }
