@@ -18,3 +18,8 @@ message MakeOrderResponse {
 message DeleteOrderRequest {
   int32 id = 1;
 }
+
+// DeleteOrder response message
+message DeleteOrderResponse {
+  bool success = 1;
+}
