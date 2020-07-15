@@ -3,10 +3,15 @@ syntax = "proto3";
 package order;
 
 service OrderService {
+}
+
 // MakeOrder request message
 message MakeOrderRequest {
   int32 id = 1;
   string product = 2;
   double price = 3;
 }
+// DeleteOrder response message
+message DeleteOrderResponse {
+  bool success = 1;
 }
