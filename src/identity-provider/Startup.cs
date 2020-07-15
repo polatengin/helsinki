@@ -55,6 +55,12 @@ namespace identity_provider
 
             await context.Response.WriteAsync("Permission denied");
           }
+          else if(string.IsNullOrWhiteSpace(token))
+          {
+            context.Response.StatusCode = 403;
+
+            await context.Response.WriteAsync("Permission denied");
+          }
         });
       });
     }
