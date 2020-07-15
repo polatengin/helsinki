@@ -5,6 +5,8 @@ package order;
 service OrderService {
   // Sends an order
   rpc MakeOrder (MakeOrderRequest) returns (MakeOrderResponse);
+  // Removes an order
+  rpc DeleteOrder (DeleteOrderRequest) returns (DeleteOrderResponse);
 }
 
 // MakeOrder request message
