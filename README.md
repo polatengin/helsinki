@@ -16,10 +16,10 @@ cd src/microservice-1
 dotnet run
 ```
 
-To run Identity Provider
+To run Auth Provider
 
 ```bash
-cd src/identity-provider
+cd src/auth-provider
 
 dotnet run
 ```

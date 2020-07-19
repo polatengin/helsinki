@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "identity_provider": {
+    "auth_provider": {
       "commandName": "Project",
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7001;http://localhost:7000",
